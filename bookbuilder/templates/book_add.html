@@ -1,0 +1,23 @@
+{% extends 'book_theme.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+        <div class="bg-light text-dark p-5 m-5">
+
+            <h1>Add New Book</h1>
+
+            <form action="" method="post">{% csrf_token %}
+
+                <!-- Without Crispy Forms {{ form.as_p }}  -->
+
+                {{ form|crispy }}
+
+                <button class="btn btn-success mt-5" type="submit">Add Record</button>
+            </form>
+        </div>
+
+
+
+{% endblock main %}

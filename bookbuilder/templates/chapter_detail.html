@@ -1,0 +1,15 @@
+{% extends 'book_theme.html' %}
+
+
+{% block main %}
+
+    <h1>{{ chapter.title }}</h1>
+
+    <h2>
+        <a href="{{ chapter.pk }}/" class="btn btn-success">Edit Chapter</a>
+    </h2>
+    <p>
+        No text in this chapter
+    </p>
+
+{% endblock main %}

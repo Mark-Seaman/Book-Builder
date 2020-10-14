@@ -1,0 +1,17 @@
+{% extends 'book_theme.html' %}
+
+
+{% block main %}
+
+
+    <a href="/book/add" class="btn btn-success">Add Book</a>
+
+    <h1>Available Books</h1>
+
+    <ul>
+        {% for book in object_list %}
+            <li><a href="{{ book.pk }}">{{ book.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock main %}

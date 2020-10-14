@@ -28,6 +28,7 @@ Data Model Classes
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Author(models.Model):
@@ -35,7 +36,7 @@ class Author(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.pk}. {self.name} {self.user.email}'
+        return f'{self.pk} - {self.name}'
 
 
 class Book(models.Model):
@@ -43,25 +44,31 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.pk}. {self.title} by {self.author.name}'
+        return f'{self.pk} - {self.title} by {self.author.name}'
 
-    
+    def get_absolute_url(self):
+        return reverse('book_detail', args=[str(self.id)])
+
+
 class Chapter(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, editable=False)
     title = models.CharField(max_length=100)
     chapter_num = models.IntegerField()
 
     def __str__(self):
-        return f'{self.pk}. {self.title}'
+        return f'Chapter {self.chapter_num} - {self.title}'
 
-    
+    def get_absolute_url(self):
+        return reverse('book_detail', args=[str(self.book.id)])
+
+
 class Paragraph(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     text = models.TextField()
     order = models.IntegerField()
 
     def __str__(self):
-        return f'{self.pk}. {self.text[:20]}'
+        return f'[{self.order}] {self.text[:20]}...'
 
     
 class Image(models.Model):
@@ -71,4 +78,4 @@ class Image(models.Model):
     order = models.IntegerField()
 
     def __str__(self):
-        return f'{self.pk}. {self.src}'
+        return f'[{self.order}] {self.src}'

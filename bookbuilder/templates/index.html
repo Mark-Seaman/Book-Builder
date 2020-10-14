@@ -1,39 +1,45 @@
-<h1>Book Builder Application</h1>
-
-<p>This app doesn't do anything!</p>
-
-<h2>Book Builder Views</h2>
-
-<h3>Books</h3>
-
-<ul>
-    <li><a href="list_books.html">List Books</a></li>
-    <li><a href="edit_book.html">Edit Book</a></li>
-    <li><a href="read_book.html">Read Book</a></li>
-    <li><a href="delete_book.html">Delete Book</a></li>
-</ul>
+{% extends 'book_theme.html' %}
 
 
-<h3>Chapters</h3>
+{% block main %}
 
-<ul>
-    <li><a href="edit_chapter.html">Edit Chapter</a></li>
-    <li><a href="read_chapter.html">Read Chapter</a></li>
-    <li><a href="delete_chapter.html">Delete Chapter</a></li>
-</ul>
+    <h1>Book Builder Application</h1>
 
+    <p><a href="book/">List Books</a></p>
 
-<h3>Users</h3>
+    <h2>Book Builder Views</h2>
 
-<ul>
-    <li><a href="register_reader.html">Register Reader</a></li>
-    <li><a href="register_author.html">Register Author</a></li>
-    <li><a href="login.html">Login</a></li>
-    <li><a href="logout.html">Logout</a></li>
-    <li><a href="admin/">Admin Views</a></li>
-</ul>
+    <h3>Books</h3>
+
+    <ul>
+        <li><a href="list_books.html">List Books</a></li>
+        <li><a href="edit_book.html">Edit Book</a></li>
+        <li><a href="read_book.html">Read Book</a></li>
+        <li><a href="delete_book.html">Delete Book</a></li>
+    </ul>
 
 
+    <h3>Chapters</h3>
+
+    <ul>
+        <li><a href="edit_chapter.html">Edit Chapter</a></li>
+        <li><a href="read_chapter.html">Read Chapter</a></li>
+        <li><a href="delete_chapter.html">Delete Chapter</a></li>
+    </ul>
+
+
+    <h3>Users</h3>
+
+    <ul>
+        <li><a href="register_reader.html">Register Reader</a></li>
+        <li><a href="register_author.html">Register Author</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="logout.html">Logout</a></li>
+        <li><a href="admin/">Admin Views</a></li>
+    </ul>
+
+
+{% endblock main %}
 
 
 

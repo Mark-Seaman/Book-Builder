@@ -1,0 +1,17 @@
+{% extends 'book_theme.html' %}
+
+
+{% block main %}
+
+
+    <a href="/chapter/add" class="btn btn-success">Add Chapter</a>
+
+    <h1>Table of Contents</h1>
+
+    <ul>
+        {% for chapter in object_list %}
+            <li><a href="chapter/{{ chapter.pk }}">{{ chapter.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock main %}
