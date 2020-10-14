@@ -1,16 +1,10 @@
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView
-from os.path import exists
 
 from .models import Book, Chapter
 
 
-class PageView(TemplateView):
-
-    def get_template_names(self):
-        template_name = self.kwargs.get('template', 'index.html')
-        if not exists('templates/' + template_name):
-            template_name = 'missing.html'
-        return template_name
+class HomeView(TemplateView):
+    template_name = 'home.html'
 
 
 class BookAdd(CreateView):
@@ -59,11 +53,6 @@ class ChapterAdd(CreateView):
 class ChapterDetail(DetailView):
     template_name = 'chapter_detail.html'
     model = Chapter
-
-    def get_context_data(self, **kwargs):
-        kwargs = super(ChapterDetail, self).get_context_data(**kwargs)
-        # kwargs['object'] = '2'
-        return kwargs
 
 
 class ChapterEdit(UpdateView):
