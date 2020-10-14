@@ -7,18 +7,30 @@ It takes about 50 specific skills to develop web pages using HTML and CSS.
 Here are the skills that you need for success.
 
 
-## Software Engineering
+## Requirements
+* [Project Charter](ProjectCharter.md)
+* [User Stories](UserStories.md)
 * [Issue Tracking](Issues.md)
+* [Project Team](ProjectTeam.md)
+* [Progress](Progress.md)
 
 
-## Developer Setup
+## Design
+
+### Django
+* [What Is Django?](WhatIsDango.md)
+* [Setup Python](SetupPython.md)
+* [Debug Django Admin](DjangoAdmin.md)
+* [New Project](NewProject.md)
+
+### Developer Setup
 
 * [Install Brackets software](InstallBrackets.md)
 * [Install Python](InstallPython.md)
 * [Edit, Browse, Deploy](Workflow.md)
 
 
-## Github
+### Github
 
 * [Register a Github account](GithubAccount.md)
 * [Create a Github repository](GithubRepo.md)
@@ -26,19 +38,14 @@ Here are the skills that you need for success.
 * [Command Line](CommandLine.md)
 
 
-## Design
-
-* [What Is Django?](WhatIsDango.md)
-* [Setup Python](SetupPython.md)
-* [Debug Django Admin](DjangoAdmin.md)
-* [New Project](NewProject.md)
-
 
 ## Code
-* [View Prototype](ViewPrototype.md)
 * [Data Models](DataModels.md)
+* [Data Views](DataViews.md)
 * [Create New View](CreateNewView.md)
 * [Template View](TemplateView.md)
+* [View Prototype](ViewPrototype.md)
+
 
 
 ## Web App Hosting

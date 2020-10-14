@@ -16,15 +16,7 @@ Data Classes and database tables
     * book*
     * title
     * order
-* Paragraph
-    * chapter*
     * text
-    * order
-* Image
-    * chapter*
-    * src
-    * alt
-    * order
 
 “*” makes a link to another table.  This is implemented 
 by a foreign key relationship between the two tables.  
@@ -93,3 +85,8 @@ Browse to test
 
     Visit http://127.0.0.1:8002/admin/
     
+    
+## Book Builder Data Models
+
+* [book/models.py](../bookbuilder/book/models.py)
+
