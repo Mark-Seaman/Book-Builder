@@ -7,7 +7,6 @@
     <h2>by {{ book.author.name }}</h2>
 
 
-    <a href="{{ book.pk }}/" class="btn btn-success">Edit Book</a>
     <h3>About {{ book.title }}</h3>
     <p>
         Book Description Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad, aliquam corporis
@@ -29,6 +28,9 @@
         {% endfor %}
     </ul>
 
-    <a href="/chapter/{{ book.pk }}/add" class="btn btn-success">Add Chapter</a>
+    <div class="m-5">
+        <a href="{{ book.pk }}/" class="btn btn-success m-3">Edit Book</a>
+        <a href="/chapter/{{ book.pk }}/add" class="btn btn-success m-3">Add Chapter</a>
+    </div>
 
 {% endblock main %}

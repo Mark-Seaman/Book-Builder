@@ -3,9 +3,6 @@
 
 {% block main %}
 
-
-    <a href="/book/add" class="btn btn-success">Add Book</a>
-
     <h1>Available Books</h1>
 
     <ul>
@@ -13,5 +10,7 @@
             <li><a href="{{ book.pk }}">{{ book.title }}</a></li>
         {% endfor %}
     </ul>
+
+    <a href="/book/add" class="btn btn-success">Add New Book</a>
 
 {% endblock main %}
