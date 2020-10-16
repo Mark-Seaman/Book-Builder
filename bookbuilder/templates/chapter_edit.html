@@ -4,18 +4,22 @@
 
 {% block main %}
 
-        <div class="bg-light text-dark p-5 m-5">
-
-            <h1>Edit Chapter</h1>
-
+    <div class="card m-3">
+        <div class="card-header bg-light text-dark">
+            Edit Chapter
+        </div>
+        <div class="card-body bg-dark text-light">
+           
             <form action="" method="post">{% csrf_token %}
 
                 <!-- Without Crispy Forms {{ form.as_p }}  -->
-
                 {{ form|crispy }}
 
-                <button class="btn btn-success mt-5" type="submit">Save</button>
+                <button class="btn btn-success mt-3" type="submit">Save</button>
+
             </form>
+        
         </div>
+    </div>
 
 {% endblock main %}

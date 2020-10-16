@@ -44,6 +44,7 @@ class Chapter(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, editable=False)
     title = models.CharField(max_length=100)
     chapter_num = models.IntegerField()
+    text = models.TextField(default='No Chapter Text')
 
     def __str__(self):
         return f'Chapter {self.chapter_num} - {self.title}'

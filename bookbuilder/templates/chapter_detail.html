@@ -2,14 +2,20 @@
 
 
 {% block main %}
+        
+    <div class="card m-3">
+       <div class="card-header bg-light text-dark">
+           {{ chapter.title }}
+       </div>
+       <div class="card-body bg-dark text-light">
+           {% autoescape off %}
+               {{ markdown }}
+           {% endautoescape %}
+       </div>
+    </div>
 
-    <h1>{{ chapter.title }}</h1>
-
-    <h2>
-        <a href="{{ chapter.pk }}/" class="btn btn-success">Edit Chapter</a>
-    </h2>
-    <p>
-        No text in this chapter
-    </p>
+    <a href="{{ chapter.pk }}/" class="btn btn-success m-3">Edit Chapter</a>
 
 {% endblock main %}
+
+

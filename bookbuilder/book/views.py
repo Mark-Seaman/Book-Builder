@@ -1,4 +1,5 @@
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView
+from markdown import markdown
 
 from .models import Book, Chapter
 
@@ -53,6 +54,11 @@ class ChapterAdd(CreateView):
 class ChapterDetail(DetailView):
     template_name = 'chapter_detail.html'
     model = Chapter
+    
+    def get_context_data(self, **kwargs):
+        kwargs = super().get_context_data(**kwargs)
+        kwargs['markdown'] = markdown(kwargs['object'].text)
+        return kwargs
 
 
 class ChapterEdit(UpdateView):
