@@ -13,6 +13,7 @@ Here are the skills that you need for success.
 * [Issue Tracking](Issues.md)
 * [Project Team](ProjectTeam.md)
 * [Progress](Progress.md)
+* [Milestone Review](Milestone4.md)
 
 
 ## Design
@@ -45,7 +46,7 @@ Here are the skills that you need for success.
 * [Create New View](CreateNewView.md)
 * [Template View](TemplateView.md)
 * [View Prototype](ViewPrototype.md)
-
+* [Markdown Design Pattern](Markdown.md)
 
 
 ## Web App Hosting
