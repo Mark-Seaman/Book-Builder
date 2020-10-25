@@ -30,7 +30,7 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, editable=False)
     title = models.CharField(max_length=100)
 
     def __str__(self):
@@ -52,21 +52,3 @@ class Chapter(models.Model):
     def get_absolute_url(self):
         return reverse('book_detail', args=[str(self.book.id)])
 
-
-# class Paragraph(models.Model):
-#     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
-#     text = models.TextField()
-#     order = models.IntegerField()
-#
-#     def __str__(self):
-#         return f'[{self.order}] {self.text[:20]}...'
-#
-#
-# class Image(models.Model):
-#     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
-#     src = models.CharField(max_length=100)
-#     alt = models.CharField(max_length=100)
-#     order = models.IntegerField()
-#
-#     def __str__(self):
-#         return f'[{self.order}] {self.src}'

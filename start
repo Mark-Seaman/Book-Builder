@@ -6,7 +6,7 @@ export p=~/Github/Book-Builder
 export code=$p/bookbuilder
 export docs=$p/docs
 
-cd $p
+cd $code
 
 
 # Activate the Python Env
@@ -38,7 +38,7 @@ function d {
 }
 
 function dj {
-    python manage.py $*
+    cd $code && python manage.py $*
 }
 
 # List the path in readable form

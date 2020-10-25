@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-2">
+
+    <div class="container">
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+            <a href="{% url 'home' %}" class="navbar-brand">Book Builder App</a>
+
+            <ul class="navbar-nav ml-auto">
+
+                {% for i in menu.menu_items %}
+                    <li class="nav-item {{ i.active }}">
+                        <a href="{{ i.url }}" class="nav-link">{{ i.label }}</a>
+                    </li>
+                {% endfor %}
+
+                {% include '_user.html' %}
+
+            </ul>
+
+        </div>
+    </div>
+
+</nav>

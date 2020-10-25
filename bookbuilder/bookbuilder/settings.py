@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # My apps
     'book',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'book.urls'
 
 TEMPLATES = [
     {
@@ -126,4 +126,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ['static']
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# URLs
+ROOT_URLCONF = 'book.urls'
+
+
+# Login Redirects
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'

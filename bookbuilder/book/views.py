@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView
 from markdown import markdown
 
@@ -8,10 +9,14 @@ class HomeView(TemplateView):
     template_name = 'home.html'
 
 
-class BookAdd(CreateView):
+class BookAdd(LoginRequiredMixin, CreateView):
     template_name = "book_edit.html"
     model = Book
     fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.author_id = 1
+        return super().form_valid(form)
 
 
 class BookDetail(DetailView):
@@ -24,7 +29,7 @@ class BookDetail(DetailView):
         return kwargs
 
 
-class BookEdit(UpdateView):
+class BookEdit(LoginRequiredMixin, UpdateView):
     template_name = "book_edit.html"
     model = Book
     fields = '__all__'

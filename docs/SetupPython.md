@@ -48,7 +48,7 @@ Download the Installer file [Python 3.8.4](https://www.python.org/downloads/rele
 
 Create a virtual environment
 
-    cd UNC-BACS-350
+    cd bookbuilder
     python3 -m venv .venv
     
 Activate the virtual environment
@@ -71,7 +71,7 @@ Install python packages
     
     pip freeze
     
-    pip install django pillow markdown
+    pip install django pillow markdown django-crispy-forms requests
     
     Collecting django
       Using cached Django-3.0.8-py3-none-any.whl (7.5 MB)

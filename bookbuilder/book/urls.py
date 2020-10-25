@@ -1,15 +1,15 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from .views import BookAdd, BookDetail, BookEdit, BookList, ChapterAdd, ChapterDetail, ChapterEdit, ChapterList, HomeView
 
 urlpatterns = [
 
-    # Admin
-    path(r'admin/', admin.site.urls),
+    # User Admin
+    path('', include('accounts.urls')),
 
     # Home
-    path('', HomeView.as_view()),
+    path('', HomeView.as_view(), name='home'),
 
     # Book
     path('book/',                   BookList.as_view(),     name='book_list'),
