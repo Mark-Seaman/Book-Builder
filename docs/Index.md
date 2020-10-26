@@ -24,11 +24,13 @@ Here are the skills that you need for success.
 * [Debug Django Admin](DjangoAdmin.md)
 * [New Project](NewProject.md)
 
+
 ### Developer Setup
 
 * [Install Brackets software](InstallBrackets.md)
 * [Install Python](InstallPython.md)
 * [Edit, Browse, Deploy](Workflow.md)
+* [Rebuild Virtual Env](RebuildVenv.md)
 
 
 ### Github
@@ -41,6 +43,7 @@ Here are the skills that you need for success.
 
 
 ## Code
+* [Development Log](DevelopmentLog.md)
 * [Data Models](DataModels.md)
 * [Data Views](DataViews.md)
 * [Create New View](CreateNewView.md)
