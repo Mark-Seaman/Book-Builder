@@ -1,6 +1,6 @@
 # Book Builder Development Log
 
-## Goals  10-25
+## Goals  10-26
 
 There are several goals that must be met on the Book Builder project.
 
@@ -9,6 +9,7 @@ There are several goals that must be met on the Book Builder project.
 * Update Data Models (Author, Book, Chapter)
 * Deploy & test code
 * Rename bookbuilder/ to config/
+* Fix favicon
 
 
 ### Rebuild Virtual Env
@@ -16,6 +17,7 @@ There are several goals that must be met on the Book Builder project.
     
  
 ### Add user administration
+* [Users accounts](UserAccounts.md)
 * Register
 * Login/logout
 * Require login

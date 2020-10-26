@@ -45,7 +45,7 @@ class BookList(ListView):
     model = Book
 
 
-class ChapterAdd(CreateView):
+class ChapterAdd(LoginRequiredMixin, CreateView):
     template_name = "chapter_add.html"
     model = Chapter
     fields = '__all__'
@@ -66,7 +66,7 @@ class ChapterDetail(DetailView):
         return kwargs
 
 
-class ChapterEdit(UpdateView):
+class ChapterEdit(LoginRequiredMixin, UpdateView):
     template_name = "chapter_edit.html"
     model = Chapter
     fields = '__all__'
