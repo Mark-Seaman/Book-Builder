@@ -20,6 +20,7 @@ alias docs='d $docs'
 alias gs='git status'
 alias wp='which python && pip freeze'
 alias l='ls -al'
+unalias co
 
 
 # Functions
