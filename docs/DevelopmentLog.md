@@ -49,9 +49,8 @@ Here is a log of recent activity and notes for later.
 * Setup Dev Context
 * Rename app settings folder
 * Deploy & test code
+* Use View Inheritance
 * Known Problems
-* Update Data Models (Author, Book, Chapter)
-* Rename bookbuilder/ to config/
 
 
 ### Setup Dev Context
@@ -68,61 +67,12 @@ Here is a log of recent activity and notes for later.
 
 ### Deploy & test code
 
-Test locally (auto, manual)
+* Test locally (auto, manual)
+* Commit and push
+* Pull and bounce server 
+* Test remotely
+* [Update Server](UpdateServer.md)
 
-* dj test
-* Basic user tests
-
-Commit and push
-
-    co "Rename app settings folder to config"
-    
-
-Pull and bounce server
-
-    Login to Python Anywhere console
-        
-        cd /home/markseaman/Book-Builder
-        
-        git pull
-        
-    Migrate the database
-    
-        python manage.py makemigrations
-        
-        python manage.py migrate
-        
-    Browse to WebApp config
-    
-    Edit the WSGI.py
-        
-        # +++++++++++ DJANGO +++++++++++
-        # To use your own django app use code like this:
-        import os
-        import sys
-
-        ## assuming your django settings file is at '/home/markseaman/Book-Builder/bookbuilder/config/settings.py'
-        ## and your manage.py is is at '/home/markseaman/Book-Builder/bookbuilder/manage.py'
-        path = '/home/markseaman/Book-Builder/bookbuilder'
-        if path not in sys.path:
-            sys.path.append(path)
-
-        os.environ['DJANGO_SETTINGS_MODULE'] = 'config.settings'
-
-        from django.core.wsgi import get_wsgi_application
-        application = get_wsgi_application()
-
-
-    Reload server
-    
-    Browse to http://markseaman.pythonanywhere.com
-
-
-Test remotely
-
-    dj test
-    
-    Basic user tests
     
 ### Use View Inheritance
 
@@ -134,151 +84,20 @@ Create a series of templates
     _navbar.html
     _user.html
     
-book_theme.html
-
-    <!doctype html>
-    <html lang="en">
-
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport"
-                  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>{{ page_title }}</title>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-                  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-                  crossorigin="anonymous">
-            <link rel="stylesheet" href="/static/shrinking-world.css">
-        </head>
-
-        <body class="bg-dark text-light">
-
-            {% block content %}
-
-                {% include '_header.html' %}
-
-                {% include '_navbar.html' %}
-
-                <main class="text-dark">
-                    <div class="container py-5">
-
-                        {% block main %}
-                            <h2>NO MAIN DEFINED</h2>
-                        {% endblock main %}
-
-                    </div>
-                </main>
-
-                {% include '_footer.html' %}
+[View Templates](ViewInheritance.md)
 
 
-            {% endblock content %}
-
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                    crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-                    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                    crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-                    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-                    crossorigin="anonymous"></script>
-
-        </body>
-
-    </html>
+### Improve Appearance
+* Use logic from Shrinking World website
+    * Header with globe banner art
+    * CSS stylesheet (static/shrinking-world.css)
+    * Body background (static/paper.png)
+    * Set text color to dark
     
 
-_header.html
+---
 
-    {% block header %}
-
-        <header class="p-lg-5">
-
-            <h1 class="display-4 ml-5">
-                <a href="/">Book Builder</a>
-            </h1>
-
-            <h2 class="ml-5">An Author's Best Friend</h2>
-
-        </header>
-
-    {% endblock header %}
-    
-
-_footer.html
-
-    {% block footer %}
-
-        <footer class="bg-primary p-3 text-center text-light">
-            &copy;2020 -
-            <b><a href="https://shrinking-world.com" class="text-light">Shrinking World</a></b>
-            - Practical Software Engineering
-        </footer>
-
-    {% endblock footer %}
-    
-
-_navbar.html
-
-    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-2">
-
-        <div class="container">
-
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-
-                <a href="{% url 'home' %}" class="navbar-brand">Book Builder App</a>
-
-                <ul class="navbar-nav ml-auto">
-
-                    {% for i in menu.menu_items %}
-                        <li class="nav-item {{ i.active }}">
-                            <a href="{{ i.url }}" class="nav-link">{{ i.label }}</a>
-                        </li>
-                    {% endfor %}
-
-                    {% include '_user.html' %}
-
-                </ul>
-
-            </div>
-        </div>
-
-    </nav>
-
-
-_user.html
-
-    {% block user %}
-    
-        {% if user.is_authenticated %}
-            <li class="nav-item active">
-                <span class="nav-link p-2 m-2">Welcome {{ user.username }}</span>
-            </li>
-            <li class="nav-item">
-                <a href="{% url 'logout' %}" class=" nav-link p-2 m-2">
-                    <i class="fas fa-sign-out-alt"></i> Log out
-                </a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <span class="nav-link p-2 m-2">You are not logged in.</span>
-            </li>
-
-            <li class="nav-item active">
-                <a href="{% url 'login' %}" class="nav-link p-2 m-2">
-                    <i class="fas fa-sign-in-alt"></i> Log In
-                </a>
-            </li>
-        {% endif %}
-        
-    {% endblock user %}
-
-    
+## Remaining Tasks
 
 ### Known Problems
 
@@ -292,25 +111,19 @@ _user.html
     * Tie add chapter to a specific book
 * Theme
     * Favicon - Setup book icon
-    * Banner - Use Shrinking World banner
-
-
 
 
 ### Fix Chapter edit
-*
-* 
+* TBD
 
 
 ### Fix Book edit
-* 
-* 
+* TBD
 
 
 ### Add Book Description
-* 
+* TBD
 
 
-
-### Rename bookbuilder/ to config/
-
+### Fix favicon
+* TBD
