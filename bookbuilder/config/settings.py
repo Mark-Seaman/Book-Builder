@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bookbuilder.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
