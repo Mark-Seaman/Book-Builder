@@ -10,28 +10,18 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
               integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
               crossorigin="anonymous">
-        <link rel="stylesheet" href="/static/book.css">
+        <link rel="stylesheet" href="/static/shrinking-world.css">
     </head>
 
     <body class="bg-dark text-light">
 
         {% block content %}
 
-            {% block header %}
-                <header class="bg-primary p-3">
-                    <div class="row media">
-                        <div class="media-body">
-                            <h1><a href="/" class="text-light ml-3">Book Builder</a></h1>
-                            <h2 class="text-light ml-3">An Author's Best Friend</h2>
-                        </div>
-                        <img class="m-3 image-fluid border border-light" src="/static/Bear.png" alt="Logo" width="100">
-                    </div>
-                </header>
-            {% endblock header %}
+            {% include '_header.html' %}
 
             {% include '_navbar.html' %}
 
-            <main>
+            <main class="text-dark">
                 <div class="container py-5">
 
                     {% block main %}
@@ -41,14 +31,7 @@
                 </div>
             </main>
 
-
-            {% block footer %}
-                <footer class="bg-primary p-3 text-center text-light">
-                    &copy;2020 -
-                    <b><a href="https://shrinking-world.com" class="text-light">Shrinking World</a></b>
-                    - Practical Software Engineering
-                </footer>
-            {% endblock footer %}
+            {% include '_footer.html' %}
 
 
         {% endblock content %}
