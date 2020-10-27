@@ -46,12 +46,17 @@ Here is a log of recent activity and notes for later.
 
 ## Goals  10-27
 
+* Setup Dev Context
 * Rename app settings folder
 * Deploy & test code
 * Known Problems
 * Update Data Models (Author, Book, Chapter)
 * Rename bookbuilder/ to config/
 
+
+### Setup Dev Context
+* Define a script that sets up the dev environment and tools
+* [start development script](../start)
 
 ### Rename app settings folder
 * mv bookbuilder config
