@@ -7,6 +7,10 @@ from .models import Post
 
 class BlogTests(TestCase):
 
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(username='testuser', email='test@email.com', password='secret')
+        self.post = Post.objects.create(title='A good title', body='Nice body content', author=self.user)
+        
     def test_page_exists(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
@@ -27,18 +31,22 @@ class BlogTests(TestCase):
         response = self.client.get('/index')
         self.assertContains(response, '<li>', count=4)
         
-#    def setUp(self):
-#        self.user = get_user_model().objects.create_user(
-#            username='testuser',
-#            email='test@email.com',
-#            password='secret'
-#        )
-#
-#        self.post = Post.objects.create(
-#            title='A good title',
-#            body='Nice body content',
-#            author=self.user,
-#        )
+    def test_post_create_view(self): 
+        data = dict(title='New title', body='New text', author=self.user.id)
+        response = self.client.post(reverse('post_new'), data)
+         
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.last().title, 'New title')
+        self.assertEqual(Post.objects.last().body, 'New text')
+        self.assertEqual(len(Post.objects.all()), 2)
+        
+    def test_post_update_view(self): 
+        kwargs = {
+            'title': 'Updated title',
+            'body': 'Updated text',
+        }
+        response = self.client.post(reverse('post_edit', args='1'), kwargs)
+        self.assertEqual(response.status_code, 302)
 #
 #    def test_string_representation(self):
 #        post = Post(title='A sample title')
@@ -66,22 +74,7 @@ class BlogTests(TestCase):
 #        self.assertContains(response, 'A good title')
 #        self.assertTemplateUsed(response, 'post_detail.html')
 #
-#    def test_post_create_view(self): # new
-#        response = self.client.post(reverse('post_new'), {
-#            'title': 'New title',
-#            'body': 'New text',
-#            'author': self.user.id,
-#        })
-#        self.assertEqual(response.status_code, 302)
-#        self.assertEqual(Post.objects.last().title, 'New title')
-#        self.assertEqual(Post.objects.last().body, 'New text')
 #
-#    def test_post_update_view(self): # new
-#        response = self.client.post(reverse('post_edit', args='1'), {
-#            'title': 'Updated title',
-#            'body': 'Updated text',
-#        })
-#        self.assertEqual(response.status_code, 302)
 #
 #    def test_post_delete_view(self): # new
 #        response = self.client.post(

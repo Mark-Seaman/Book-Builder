@@ -25,8 +25,13 @@ class BookDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         kwargs = super().get_context_data(**kwargs)
+        text = kwargs['object'].description
+        if text:
+            text = markdown(text)
+        else:
+            text = 'No description'
         kwargs['chapters'] = Chapter.objects.filter(book=kwargs['object'])
-        kwargs['markdown'] = markdown(kwargs['object'].description)
+        kwargs['markdown'] = text
         return kwargs
 
 

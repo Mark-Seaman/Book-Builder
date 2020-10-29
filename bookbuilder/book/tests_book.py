@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from book.author import add_author, get_author
 from book.book import add_book, delete_book, get_book, list_books
@@ -30,6 +31,15 @@ class BookTests(TestCase):
         self.user = create_test_user()
         author = add_author(self.user, 'Charles Dickens')
         self.book = add_book('Tale of Two Cities', author)
+
+    def test_string_representation(self):
+        book = Book.objects.get(pk=1)
+        self.assertEqual(str(book), '1 - Tale of Two Cities by Charles Dickens')
+
+    def test_book_content(self):
+        self.assertEqual(f'{self.book.title}', 'Tale of Two Cities')
+        self.assertEqual(f'{self.book.author.name}', 'Charles Dickens')
+        self.assertEqual(f'{self.book.description}', 'None')
 
     def test_book_model(self):
         self.check_num_books(1)
@@ -84,51 +94,46 @@ class BookViewsTests(TestCase):
         self.user = create_test_user()
         self.author = add_author(self.user, 'Charles Dickens')
         self.book = add_book('Tale of Two Cities', self.author)
-
-    def test_string_representation(self):
-        book = Book.objects.get(pk=1)
-        self.assertEqual(str(book), '1 - Tale of Two Cities by Charles Dickens')
+        response = self.client.login(username='TEST_DUDE', password='secret')
+        self.assertEqual(response, True)
 
     def test_get_absolute_url(self):
         self.assertEqual(self.book.get_absolute_url(), '/book/1')
 
-    def test_book_content(self):
-        self.assertEqual(f'{self.book.title}', 'Tale of Two Cities')
-        self.assertEqual(f'{self.book.author.name}', 'Charles Dickens')
-        self.assertEqual(f'{self.book.description}', 'None')
+    def test_book_list_view(self):
+        response = self.client.get(reverse('book_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Tale of Two Cities')
+        self.assertContains(response, '<li>', count=1)
+        self.assertTemplateUsed(response, 'book_list.html')
 
-#    def test_book_list_view(self):
-#        response = self.client.get(reverse('home'))
-#        self.assertEqual(response.status_code, 200)
-#        self.assertContains(response, 'Nice body content')
-#        self.assertTemplateUsed(response, 'home.html')
-#
-#    def test_book_detail_view(self):
-#        response = self.client.get('/book/1/')
-#        no_response = self.client.get('/book/100000/')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertEqual(no_response.status_code, 404)
-#        self.assertContains(response, 'A good title')
-#        self.assertTemplateUsed(response, 'book_detail.html')
-#
-#    def test_book_create_view(self): # new
-#        response = self.client.book(reverse('book_new'), {
-#            'title': 'New title',
-#            'body': 'New text',
-#            'author': self.user.id,
-#        })
-#        self.assertEqual(response.status_code, 302)
-#        self.assertEqual(Post.objects.last().title, 'New title')
-#        self.assertEqual(Post.objects.last().body, 'New text')
-#
-#    def test_book_update_view(self): # new
-#        response = self.client.book(reverse('book_edit', args='1'), {
-#            'title': 'Updated title',
-#            'body': 'Updated text',
-#        })
-#        self.assertEqual(response.status_code, 302)
-#
-#    def test_book_delete_view(self): # new
-#        response = self.client.book(
-#            reverse('book_delete', args='1'))
-#        self.assertEqual(response.status_code, 302)
+    def test_book_detail_view(self):
+        response = self.client.get('/book/1')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Charles Dickens')
+        self.assertContains(response, 'Tale of Two Cities')
+        self.assertContains(response, 'No description')
+        self.assertTemplateUsed(response, 'book_detail.html')
+        no_response = self.client.get('/book/100000')
+        self.assertEqual(no_response.status_code, 404)
+
+    def test_book_create_view(self):
+        new_book = dict(title="Sea Wolf", description='No big deal')
+        response = self.client.post(reverse('book_add'), new_book)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(len(Book.objects.all()), 2)
+        book = Book.objects.last()
+        self.assertEqual(book.author.name, 'Charles Dickens')
+        self.assertEqual(book.title, 'Sea Wolf')
+        self.assertEqual(book.description, 'No big deal')
+
+    def test_book_update_view(self):
+        kwargs = dict(title='Lord of the Rings', description='Great story')
+        response = self.client.post(reverse('book_edit', args='1'), kwargs)
+        self.assertEqual(response.status_code, 302)
+        b = Book.objects.get(pk=1)
+        self.assertEqual(b.title, 'Lord of the Rings')
+
+    # def test_book_delete_view(self):
+    #     response = self.client.post(reverse('book_delete', args='1'))
+    #     self.assertEqual(response.status_code, 302)
