@@ -16,8 +16,9 @@ Data Model Classes
     * chapter_num
 '''
 
-from django.db import models
+
 from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
 
 
@@ -32,6 +33,7 @@ class Author(models.Model):
 class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, editable=False)
     title = models.CharField(max_length=100)
+    description = models.TextField(null=True)
 
     def __str__(self):
         return f'{self.pk} - {self.title} by {self.author.name}'

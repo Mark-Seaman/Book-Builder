@@ -94,6 +94,117 @@ Create a series of templates
     * Body background (static/paper.png)
     * Set text color to dark
     
+---
+
+
+## Goals  10-29
+
+* Description for book
+* Book for chapter
+* Add and edit authors
+* Author for book
+* Favicon - Setup book icon
+
+
+
+### What Next?
+
+* **TEST**  (current state)
+    - dj test, dj runserver
+    - Create tests find problems and log issues
+* **FIX**  (known problems)
+    - Fix known issues
+* **EXTEND**  (new features)
+    - Create features with tests
+* **IMPROVE**  (simplify)
+    - Refactor to eliminate duplication
+    - Refactor Django tests
+
+
+### Test
+* dj test
+* dj runserver
+
+
+### Known Problems
+* Description for book
+* Book for chapter
+* Add and edit authors
+* Author for book
+* Favicon - Setup book icon
+* Automatically set chapter numbers
+
+
+### Description for book
+* Detail View pass in markdown HTML and display
+* Modify book/models.py
+* Modify book/views.py
+* Modify templates/book_detail.html
+* Modify book/tests.py
+
+
+### Set Book for chapter
+* Remove the book field from forms for add or edit
+* Pass in the book Id when creating a new chapter
+* Set the book Id in the form when saving the record
+
+```python
+# models.py
+class Chapter(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, editable=False)
+    title = models.CharField(max_length=100)
+    chapter_num = models.IntegerField()
+    text = models.TextField(default='No Chapter Text')
+
+    
+# urls.py
+urlpatterns = [
+    # Pass the book id
+    path('chapter/<int:book_id>/add', ChapterAdd.as_view(),     name='chapter_add'),
+]
+
+
+# views.py
+class ChapterAdd(LoginRequiredMixin, CreateView):
+
+    template_name = "chapter_add.html"
+    model = Chapter
+    fields = '__all__'
+
+    def form_valid(self, form):
+        book_id = self.kwargs.get('book_id')
+        form.instance.book_id = book_id
+        return super().form_valid(form)
+```
+
+
+### Favicon - Setup book icon
+* Copy the Bear Icon and the Shrinking World icon to /static
+* In the base template load the static files and set the icon
+
+```html
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+       ...
+        <link rel="stylesheet" href="/static/shrinking-world.css">
+        <link rel="shortcut icon" type="image/png" href="{% static 'Bear.favicon.ico' %}"/>
+    </head>
+```
+
+
+### Add and edit authors
+* TBD
+
+
+
+### Extend (new features)
+
+
+### Improve  (simplify)
+
 
 ---
 
@@ -101,29 +212,3 @@ Create a series of templates
 
 ### Known Problems
 
-* Author
-    * Authors are currently hard code to Author 1
-    * Need to create views to add and edit new authors
-    * Tie author to logged in user
-*  Book
-    * Works correctly
-*  Chapter
-    * Tie add chapter to a specific book
-* Theme
-    * Favicon - Setup book icon
-
-
-### Fix Chapter edit
-* TBD
-
-
-### Fix Book edit
-* TBD
-
-
-### Add Book Description
-* TBD
-
-
-### Fix favicon
-* TBD

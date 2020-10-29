@@ -1,32 +1,34 @@
 {% extends 'book_theme.html' %}
 
 
+
 {% block main %}
 
     <h1>{{ book.title }}</h1>
     <h2>by {{ book.author.name }}</h2>
 
-
     <h3>About {{ book.title }}</h3>
     <p>
-        Book Description Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad, aliquam corporis
-        deleniti dicta excepturi fuga fugiat ipsa ipsum laudantium nobis non nostrum numquam quam quasi qui quisquam quo
-        reiciendis saepe sed suscipit tenetur unde vel voluptate voluptatum? Aliquid eligendi esse numquam obcaecati
-        officiis quae voluptatibus. Ab aliquid at consectetur deserunt eum explicabo illo, impedit, ipsa ipsum magnam
-        odio quibusdam totam voluptas! Beatae blanditiis, culpa distinctio est ex ipsum iusto modi nam optio placeat
-        praesentium saepe sequi tenetur ut vel vitae voluptas! Accusantium adipisci aliquid, culpa, dolorum enim fuga
-        hic illo libero nam nisi obcaecati odio officia placeat voluptates voluptatum.
+         {% autoescape off %}
+             {{ markdown }}
+         {% endautoescape %}
     </p>
 
-    <h3>Chapters</h3>
-    <ul>
+    <div class="card">
+        <div class="card-header">
+            <h3>Chapters</h3>
+        </div>
+        <div class="card-body">
+            <ul>
 
-        {% for chapter in chapters %}
-            <li>
-                <a href="/chapter/{{ chapter.pk }}">{{ chapter }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+                {% for chapter in chapters %}
+                    <li>
+                        <a href="/chapter/{{ chapter.pk }}">{{ chapter }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
     <div class="m-5">
         <a href="{{ book.pk }}/" class="btn btn-success m-3">Edit Book</a>

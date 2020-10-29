@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
 
@@ -6,20 +8,28 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{{ page_title }}</title>
+        <title>Book Builder</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
               integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
               crossorigin="anonymous">
         <link rel="stylesheet" href="/static/shrinking-world.css">
+        <link rel="shortcut icon" type="image/png" href="{% static 'Bear.favicon.ico' %}"/>
     </head>
 
     <body class="bg-dark text-light">
 
         {% block content %}
 
-            {% include '_header.html' %}
 
-            {% include '_navbar.html' %}
+            {% block header %}
+                {% include '_header.html' %}
+            {% endblock header %}
+
+
+            {% block navbar %}
+                {% include '_navbar.html' %}
+            {% endblock navbar %}
+
 
             <main class="text-dark">
                 <div class="container py-5">
@@ -31,7 +41,10 @@
                 </div>
             </main>
 
-            {% include '_footer.html' %}
+
+            {% block footer %}
+                {% include '_footer.html' %}
+            {% endblock footer %}
 
 
         {% endblock content %}

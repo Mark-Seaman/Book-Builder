@@ -30,9 +30,15 @@ Create a series of templates
 
             {% block content %}
 
-                {% include '_header.html' %}
+                {% block header %}
+                    {% include '_header.html' %}
+                {% endblock header %}
 
-                {% include '_navbar.html' %}
+
+                {% block navbar %}
+                    {% include '_navbar.html' %}
+                {% endblock navbar %}
+
 
                 <main class="text-dark">
                     <div class="container py-5">
@@ -44,8 +50,10 @@ Create a series of templates
                     </div>
                 </main>
 
-                {% include '_footer.html' %}
 
+                {% block footer %}
+                    {% include '_footer.html' %}
+                {% endblock footer %}
 
             {% endblock content %}
 
@@ -68,98 +76,86 @@ Create a series of templates
 ## _header.html
 
 ```html
-    {% block header %}
+<header class="p-lg-5">
 
-        <header class="p-lg-5">
+    <h1 class="display-4 ml-5">
+        <a href="/">Book Builder</a>
+    </h1>
 
-            <h1 class="display-4 ml-5">
-                <a href="/">Book Builder</a>
-            </h1>
+    <h2 class="ml-5">An Author's Best Friend</h2>
 
-            <h2 class="ml-5">An Author's Best Friend</h2>
-
-        </header>
-
-    {% endblock header %}
+</header>
 ```
     
 
 ## _footer.html
 
 ```html
-    {% block footer %}
-
-        <footer class="bg-primary p-3 text-center text-light">
-            &copy;2020 -
-            <b><a href="https://shrinking-world.com" class="text-light">Shrinking World</a></b>
-            - Practical Software Engineering
-        </footer>
-
-    {% endblock footer %}
+<footer class="bg-primary p-3 text-center text-light">
+    &copy;2020 -
+    <b><a href="https://shrinking-world.com" class="text-light">Shrinking World</a></b>
+    - Practical Software Engineering
+</footer>
 ```
     
 
 ## _navbar.html
 
 ```html
-    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-2">
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-2">
 
-        <div class="container">
+    <div class="container">
 
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                <a href="{% url 'home' %}" class="navbar-brand">Book Builder App</a>
+            <a href="{% url 'home' %}" class="navbar-brand">Book Builder App</a>
 
-                <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto">
 
-                    {% for i in menu.menu_items %}
-                        <li class="nav-item {{ i.active }}">
-                            <a href="{{ i.url }}" class="nav-link">{{ i.label }}</a>
-                        </li>
-                    {% endfor %}
+                {% for i in menu.menu_items %}
+                    <li class="nav-item {{ i.active }}">
+                        <a href="{{ i.url }}" class="nav-link">{{ i.label }}</a>
+                    </li>
+                {% endfor %}
 
-                    {% include '_user.html' %}
+                {% include '_user.html' %}
 
-                </ul>
+            </ul>
 
-            </div>
         </div>
+    </div>
 
-    </nav>
+</nav>
 ```
 
 
 ## _user.html
 
 ```html
-    {% block user %}
-    
-        {% if user.is_authenticated %}
-            <li class="nav-item active">
-                <span class="nav-link p-2 m-2">Welcome {{ user.username }}</span>
-            </li>
-            <li class="nav-item">
-                <a href="{% url 'logout' %}" class=" nav-link p-2 m-2">
-                    <i class="fas fa-sign-out-alt"></i> Log out
-                </a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <span class="nav-link p-2 m-2">You are not logged in.</span>
-            </li>
+{% if user.is_authenticated %}
+    <li class="nav-item active">
+        <span class="nav-link p-2 m-2">Welcome {{ user.username }}</span>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'logout' %}" class=" nav-link p-2 m-2">
+            <i class="fas fa-sign-out-alt"></i> Log out
+        </a>
+    </li>
+{% else %}
+    <li class="nav-item">
+        <span class="nav-link p-2 m-2">You are not logged in.</span>
+    </li>
 
-            <li class="nav-item active">
-                <a href="{% url 'login' %}" class="nav-link p-2 m-2">
-                    <i class="fas fa-sign-in-alt"></i> Log In
-                </a>
-            </li>
-        {% endif %}
-        
-    {% endblock user %}
+    <li class="nav-item active">
+        <a href="{% url 'login' %}" class="nav-link p-2 m-2">
+            <i class="fas fa-sign-in-alt"></i> Log In
+        </a>
+    </li>
+{% endif %}
 ```
 
     
