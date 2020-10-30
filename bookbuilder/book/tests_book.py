@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
@@ -90,13 +91,20 @@ class BookTests(TestCase):
 
 class BookViewsTests(TestCase):
 
-    def setUp(self):
-        self.user = create_test_user()
-        self.author = add_author(self.user, 'Charles Dickens')
-        self.book = add_book('Tale of Two Cities', self.author)
+    def create_test_user(self):
+        args = dict(username='TEST_DUDE', email='me@here.com', password='secret')
+        self.user = get_user_model().objects.create_user(**args)
+
+    def login(self):
         response = self.client.login(username='TEST_DUDE', password='secret')
         self.assertEqual(response, True)
 
+    def setUp(self):
+        self.create_test_user()
+        self.author = add_author(self.user, 'Charles Dickens')
+        self.book = add_book('Tale of Two Cities', self.author)
+        self.login()
+        
     def test_get_absolute_url(self):
         self.assertEqual(self.book.get_absolute_url(), '/book/1')
 

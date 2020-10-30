@@ -195,6 +195,13 @@ class ChapterAdd(LoginRequiredMixin, CreateView):
 ```
 
 
+### Test View Without Data
+* Test the views for proper structure
+* This tests looks a pages without any data
+* [Test Views](TestViews.md)
+* [View Tests Code](https://github.com/Mark-Seaman/Book-Builder/blob/master/bookbuilder/book/tests.py)
+
+
 ### Test Book Views
 * Test the views for the Book data model
 * Views
@@ -204,7 +211,6 @@ class ChapterAdd(LoginRequiredMixin, CreateView):
     * book_detail
     * book_delete
 * [Test Book Views](TestBookViews.md)
-* [View Tests Code](https://github.com/Mark-Seaman/Book-Builder/blob/master/bookbuilder/book/tests.py)
 * [Book Tests Code](https://github.com/Mark-Seaman/Book-Builder/blob/master/bookbuilder/book/tests_book.py)
 
 
