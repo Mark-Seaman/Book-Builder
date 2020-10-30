@@ -195,15 +195,27 @@ class ChapterAdd(LoginRequiredMixin, CreateView):
 ```
 
 
-### Add and edit authors
-* TBD
+### Test Book Views
+* Test the views for the Book data model
+* Views
+    * book_list
+    * book_add
+    * book_edit
+    * book_detail
+    * book_delete
+* [Test Book Views](TestBookViews.md)
+* [View Tests Code](https://github.com/Mark-Seaman/Book-Builder/blob/master/bookbuilder/book/tests.py)
+* [Book Tests Code](https://github.com/Mark-Seaman/Book-Builder/blob/master/bookbuilder/book/tests_book.py)
 
 
+### Deploy & test code
 
-### Extend (new features)
+* Test locally (auto, manual)
+* Commit and push
+* Pull and bounce server 
+* Test remotely
+* [Update Server](UpdateServer.md)
 
-
-### Improve  (simplify)
 
 
 ---
@@ -212,3 +224,6 @@ class ChapterAdd(LoginRequiredMixin, CreateView):
 
 ### Known Problems
 
+### Extend (new features)
+
+### Improve  (simplify)
