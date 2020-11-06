@@ -30,12 +30,34 @@ settings.py
 
     cd Book-Builder
     git pull   # Brings in new code
-
-
+    
 ### Reload Server
 
     Visit page https://www.pythonanywhere.com/user/markseaman/
     
     View error logs
     
+
+### Collect Static Media
+
+In order to use the Admin views in Django you must gather up the
+CSS, Image, and JavaScript files that the code needs. If you don't
+set this up properly then the media will be missing from the views.
+
+We set up the static media in the settings file. This causes the static
+media to be served from the "app directory/static".
+
+bookbuilder/settings.py
+
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = ['static']
+    
+    # Path to put additional files to be served (eg. Admin pages)
+    STATIC_ROOT = '/home/markseaman/Book-Builder/bookbuilder/static'
+    
+Collect the static media on the production server.
+
+    python manage.py collectstatic
+
+When this is properly configured the admin views will appear properly styled.
 

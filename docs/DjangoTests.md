@@ -87,5 +87,6 @@ On Book Builder we will write tests that make page requests for each view in our
 These will be written as we create views to remove any development burden.  Each test will
 check to make sure that the page is available and that the correct HTML template is used.
 
-* See code for [Book Builder Tests](../bookbuilder/book/tests.py)
+* See code for [Book Builder Tests](https://github.com/Mark-Seaman/Book-Builder/tree/master/bookbuilder/book/tests.py)
+* Link to [Code for Book Builder](https://github.com/Mark-Seaman/Book-Builder/tree/master/docs/plan/Milestone-2/Code.md)
 
