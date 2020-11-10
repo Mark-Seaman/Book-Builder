@@ -103,7 +103,7 @@ class BookViewsTests(TestCase):
         self.create_test_user()
         self.author = add_author(self.user, 'Charles Dickens')
         self.book = add_book('Tale of Two Cities', self.author)
-        # self.login()
+        self.login()
 
     def test_get_absolute_url(self):
         self.assertEqual(self.book.get_absolute_url(), '/book/1')

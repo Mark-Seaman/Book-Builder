@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.test import SimpleTestCase
+from django.test import Client, SimpleTestCase
 from markdown import markdown
 
 
@@ -16,6 +16,15 @@ class MarkdownTests(SimpleTestCase):
         actual = markdown('# Headline\n\nParagraph 1\n\nParagraph 2')
         expected = '<h1>Headline</h1>\n<p>Paragraph 1</p>\n<p>Paragraph 2</p>'
         self.assertEqual(actual, expected)
+
+
+# -----------------------------------------------------
+#   C l i e n t
+
+def test_client():
+    response = Client().get('/book/1')
+    assert response.status_code == 200
+    print(response.content)
 
 
 # -----------------------------------------------------

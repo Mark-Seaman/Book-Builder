@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # My apps
     'book',
     'accounts',
+    'page_muncher',
 ]
 
 MIDDLEWARE = [
